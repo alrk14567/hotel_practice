@@ -28,7 +28,7 @@ public class RoomServiceImpl implements RoomService {
     private final UserRepository userRepository;
 
 
-    public boolean save(Long hotelId,RoomDto roomDto) throws IOException {
+    public boolean save(Long hotelId,RoomDto roomDto) {
 
         Optional<HotelEntity> optionalHotelEntity = hotelRepository.findById(roomDto.getHotelId());
         if (optionalHotelEntity.isPresent()) {

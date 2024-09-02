@@ -3,6 +3,8 @@ package com.example.hotel_booking.controller;
 import com.example.hotel_booking.dto.*;
 import com.example.hotel_booking.entity.UserEntity;
 import com.example.hotel_booking.service.Impl.AdminUserServiceImpl;
+import com.example.hotel_booking.service.Impl.ReservationServiceImpl;
+import com.example.hotel_booking.service.Impl.ReviewServiceImpl;
 import com.example.hotel_booking.service.Impl.UserServiceImpl;
 import com.example.hotel_booking.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,17 +24,19 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user/")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserServiceImpl USER_SERVICE;
     @Autowired
     private BCryptPasswordEncoder encoder;
 
     private final UserService userService;
+    private final ReservationServiceImpl reservationService;
+    private final ReviewServiceImpl reviewService;
 
 
 
-    @RequestMapping("authOk")
+    @RequestMapping("/authOk")
     public ResponseEntity<Map<String, Object>> authOk(Authentication authentication) {
         Map<String, Object> resultMap = new HashMap<>();
         UserDto userDto = (UserDto) authentication.getPrincipal();
@@ -49,7 +53,7 @@ public class UserController {
         return ResponseEntity.ok(resultMap);
     }
 
-    @RequestMapping("authFail")
+    @RequestMapping("/authFail")
     public ResponseEntity<Map<String, Object>> authFail() {
         System.out.println("Auth has failed");
         Map<String, Object> resultMap = new HashMap<>();
@@ -58,7 +62,7 @@ public class UserController {
         return ResponseEntity.ok(resultMap);
     }
 
-    @RequestMapping("logOutSuccess")
+    @RequestMapping("/logOutSuccess")
     public ResponseEntity<Void> logOutSuccess() {
         System.out.println("log out success");
 
@@ -66,7 +70,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public HashMap<String, Object> register(@RequestBody UserDto userDto) {
         System.out.println(userDto);
         userDto.setPassword(encoder.encode(userDto.getPassword()));
@@ -84,7 +88,7 @@ public class UserController {
         return resultMap;
     }
 
-    @GetMapping("userCount")
+    @GetMapping("/userCount")
     public ResponseEntity<Map<String, Integer>> getUserCount(@RequestParam List<String> roles) {
         int userCount = userService.countUsers(roles);
         Map<String, Integer> response = new HashMap<>();
@@ -141,24 +145,24 @@ public class UserController {
     }
 
     //id로 유저 정보 가져오기(내 정보)
-    @GetMapping("update/{id}")
+    @GetMapping("/update/{id}")
     public ResponseEntity<UserEntity> update(@PathVariable Long id, Model model) {
         System.out.println("id = " + id + ", model = " + model);
-        UserDto userDto = guestService.findById(id);
+        UserEntity userDto = userService.findById(id);
         model.addAttribute("guest", userDto);
-        return ResponseEntity.ok(guestService.findById(id));
+        return ResponseEntity.ok(userService.findById(id));
     }
 
-    //유저 업데이트(수정 페이지로)
+ /*   //유저 업데이트(수정 페이지로)
     @PostMapping("update")
-    public UserDto update(@RequestBody UserDto guestDto, Model model) {
-        UserDto updatedGuestDto = guestService.update(guestDto);
+    public UserEntity update(@RequestBody UserDto guestDto, Model model) {
+        UserEntity updatedGuestDto = userService.update(guestDto);
         model.addAttribute("guest", updatedGuestDto);
         return updatedGuestDto;
-    }
+    }*/
 
     //예약 정보 출력(내 예약)
-    @GetMapping("reservations/{id}")
+    @GetMapping("/reservations/{id}")
     public ResponseEntity<List<ReservationDto>> reservations(@PathVariable("id") Long id) {
         try {
             System.out.println("Received ID: " + id);
@@ -176,74 +180,74 @@ public class UserController {
     }
 
     // 좋아하는 호텔 유저 id를 통해 가져오기(내 찜 목록)
-    @GetMapping("wishlist/{id}")
+    @GetMapping("/wishlist/{id}")
     public List<WishlistDto> wishlist(@PathVariable Long id) {
-        List<WishlistDto> WishlistList = wishlistService.findAllByGuestId(id);
+       /* List<WishlistDto> WishlistList = wishlistService.findAllByGuestId(id);*/
 
-        return WishlistList;
+        return null;
     }
 
     // 좋아하는 호텔 저장
-    @PostMapping("wishlist")
+    @PostMapping("/wishlist")
     public String wishAddDelete(@RequestBody WishlistDto wishlistDto) {
-        wishlistService.wishAddDelete(wishlistDto);
+//        wishlistService.wishAddDelete(wishlistDto);
 
         return null;
     }
 
     //리뷰 등록
-    @GetMapping("review/{id}")
+    @GetMapping("/review/{id}")
     public List<ReviewDto> review(@PathVariable Long id) {
-        List<ReviewDto> reviewDtoList = reviewService.findAllByGuestId(id);
+//        List<ReviewDto> reviewDtoList = reviewService.findAllByGuestId(id);
 
-        return reviewDtoList;
+        return null;
     }
 
     //리뷰 수정 페이지로 갈 때 리뷰 정보 가져오기
-    @GetMapping("review")
+    @GetMapping("/review")
     public ReviewDto reviewPage() {
         ReviewDto reviewDto = new ReviewDto();
         return reviewDto;
     }
 
     // 리뷰 추가 API
-    @PostMapping("review")
+    @PostMapping("/review")
     public void reviewAdd(@RequestBody ReviewDto reviewDto) {
         reviewDto.setTotalRating(reviewDto.setTotalRating());
-        reviewService.reviewAdd(reviewDto);
+//        reviewService.reviewAdd(reviewDto);
     }
 
     //리뷰 수정 페이지로
-    @GetMapping("review/update/{id}")
+    @GetMapping("/review/update/{id}")
     public ReviewDto updatePage(@PathVariable Long id) {
         ReviewDto reviewDto = reviewService.findById(id);
         return reviewDto;
     }
 
     //리뷰 업데이트 API
-    @PostMapping("review/update")
+    @PostMapping("/review/update")
     public void reviewUpdate(@RequestBody ReviewDto reviewDto) {
         reviewDto.setTotalRating(reviewDto.setTotalRating());
         reviewService.reviewUpdate(reviewDto);
     }
 
     //리뷰 삭제 API
-    @GetMapping("review/delete/{id}")
+    @GetMapping("/review/delete/{id}")
     public void reviewDelete(@PathVariable Long id) {
         reviewService.deleteReview(id);
     }
 
     //이메일 찾기
-    @PostMapping("forgot-username")
+    @PostMapping("/forgot-username")
     public ResponseEntity<Map<String, Object>> forgotUsername(@RequestBody Map<String, String> request) {
         String name = request.get("name");
         String phone = request.get("phone");
         Map<String, Object> resultMap = new HashMap<>();
 
         try {
-            Optional<UserEntity> userOptional = guestService.findByNameAndPhone(name, phone);
-            if (userOptional.isPresent()) {
-                UserEntity user = userOptional.get();
+            UserEntity userOptional = userService.findByNameAndPhone(name, phone);
+            if (userOptional!=null) {
+                UserEntity user = userOptional;
                 resultMap.put("result", "success");
                 resultMap.put("email", user.getEmail());
                 return ResponseEntity.ok(resultMap);
@@ -261,7 +265,7 @@ public class UserController {
     }
 
     //비밀번호 찾기
-    @PostMapping("forgot-password")
+    @PostMapping("/forgot-password")
     public ResponseEntity<Map<String, Object>> forgotPassword(@RequestBody Map<String, String> request) {
         String email = request.get("email");
         String name = request.get("name");
@@ -269,11 +273,11 @@ public class UserController {
         Map<String, Object> resultMap = new HashMap<>();
 
         try {
-            Optional<UserEntity> userOptional = guestService.findByEmailAndNameAndPhone(email, name, phone);
-            if (userOptional.isPresent()) {
-                UserEntity user = userOptional.get();
+            UserEntity userOptional = userService.findByEmailAndNameAndPhone(email, name, phone);
+            if (userOptional!=null) {
+                UserEntity user = userOptional;
                 if (user.getName().equals(name) && user.getPhone().equals(phone)) {
-                    String password = guestService.getPassword(user); // 비밀번호 반환
+                    String password = user.getPassword(); // 비밀번호 반환
                     resultMap.put("result", "success");
                     resultMap.put("password", password); // 주의: 해시된 비밀번호가 반환됩니다.
                     return ResponseEntity.ok(resultMap);
@@ -294,16 +298,16 @@ public class UserController {
             return ResponseEntity.status(500).body(resultMap);
         }
     }
-    @PostMapping("auth")
+    @PostMapping("/auth")
     public ResponseEntity<Map<String, Object>> auth(@RequestBody Map<String, String> request) {
         System.out.println("GuestController.auth");
         String email = request.get("email");
         String password = request.get("password");
         Map<String, Object> resultMap = new HashMap<>();
 
-        Optional<UserEntity> userOptional = guestService.auth(email, password);
-        if (userOptional.isPresent()) {
-            UserEntity user = userOptional.get();
+        UserEntity userOptional = userService.auth(email, password);
+        if (userOptional!=null) {
+            UserEntity user = userOptional;
             resultMap.put("result", "success");
             resultMap.put("id", user.getId());
             resultMap.put("role", user.getRole());
@@ -324,9 +328,9 @@ public class UserController {
         }
     }
 
-    @PostMapping("check-password")
+    @PostMapping("/check-password")
     public ResponseEntity<Map<String, Boolean>> checkPassword(@RequestBody PasswordCheckRequest request) {
-        boolean valid = guestService.checkPassword(request.getUserId(), request.getPassword());
+        boolean valid = userService.checkPassword(request.getUserId(), request.getPassword());
         Map<String, Boolean> response = new HashMap<>();
         response.put("valid", valid);
         return ResponseEntity.ok(response);

@@ -1,6 +1,7 @@
 package com.example.hotel_booking.repository;
 
 import com.example.hotel_booking.entity.HotelEntity;
+import com.example.hotel_booking.entity.HotelFacilityEntity;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;

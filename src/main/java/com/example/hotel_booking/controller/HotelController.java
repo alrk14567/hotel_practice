@@ -40,7 +40,7 @@ public class HotelController {
     @GetMapping("hotelOne/{id}")
     public ResponseEntity<Map<?,?>> findById(@PathVariable Long id) {
 
-        return ResponseEntity.ok(hashMap);
+        return ResponseEntity.ok(null);
 
     }
 
@@ -77,7 +77,7 @@ public class HotelController {
             facilityDtoList.add(temp);
         }
 
-        facilityServiceImpl.save(facilityDtoList, id);
+//        facilityServiceImpl.save(facilityDtoList, id);
         System.out.println(facilityList);
 
         System.out.println("HotelController.write");
@@ -120,7 +120,7 @@ public class HotelController {
             facilityDtoList.add(temp);
         }
 
-        facilityServiceImpl.update(facilityDtoList, id);
+//        facilityServiceImpl.update(facilityDtoList, id);
         System.out.println(facilityList);
 
         System.out.println("HotelController.update");

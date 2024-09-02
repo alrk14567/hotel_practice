@@ -2,7 +2,6 @@ package com.example.hotel_booking.service.Impl;
 
 import com.example.hotel_booking.dto.FacilityDto;
 import com.example.hotel_booking.entity.HotelEntity;
-import com.example.hotel_booking.repository.HotelFacilityRepository;
 import com.example.hotel_booking.repository.HotelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FacilityServiceImpl {
 
-    private final HotelFacilityRepository hotelFacilityRepository;
+  /*  private final HotelFacilityRepository hotelFacilityRepository;
     private final HotelRepository hotelRepository;
 
 
@@ -50,5 +49,5 @@ public class FacilityServiceImpl {
         }
 
     }
-
+*/
 }

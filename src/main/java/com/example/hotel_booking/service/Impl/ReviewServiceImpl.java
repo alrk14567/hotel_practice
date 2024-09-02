@@ -1,6 +1,7 @@
 package com.example.hotel_booking.service.Impl;
 
 import com.example.hotel_booking.dto.ReviewDto;
+import com.example.hotel_booking.entity.ReviewEntity;
 import com.example.hotel_booking.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,7 @@
 package com.example.hotel_booking.service.Impl;
 
 import com.example.hotel_booking.dto.RoomTypeDto;
+import com.example.hotel_booking.entity.RoomTypeEntity;
 import com.example.hotel_booking.repository.RoomTypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

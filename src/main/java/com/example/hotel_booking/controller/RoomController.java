@@ -3,6 +3,7 @@ package com.example.hotel_booking.controller;
 import com.example.hotel_booking.dto.RoomDto;
 import com.example.hotel_booking.dto.RoomFileDto;
 import com.example.hotel_booking.entity.RoomEntity;
+import com.example.hotel_booking.repository.RoomFileRepository;
 import com.example.hotel_booking.service.Impl.RoomTypeServiceImpl;
 import com.example.hotel_booking.service.RoomService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class RoomController {
 
     private final RoomService roomService;
     private final RoomTypeServiceImpl roomTypeService;
-    private final RoomFileServiceImpl roomFileService;
+    private final RoomFileRepository roomFileService;
 
 
     @GetMapping("/{id}")        //다 리스폰스엔티티 => 엔티티값 넣어라
@@ -86,7 +87,7 @@ public class RoomController {
             temp.setStoredFileName(storedFileName);
             temp.setExtension(extension);
 
-            roomFileService.save(temp, id);
+           /* roomFileService.save(temp, id);*/
 
         }
 

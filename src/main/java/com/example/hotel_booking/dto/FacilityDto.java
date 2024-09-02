@@ -1,5 +1,6 @@
 package com.example.hotel_booking.dto;
 
+import com.example.hotel_booking.entity.HotelFacilityEntity;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +20,7 @@ public class FacilityDto implements Serializable {
         FacilityDto facilityDto = new FacilityDto();
         facilityDto.setId(hotelFacilityEntity.getId());
         facilityDto.setHotelId(hotelId);
-        facilityDto.setFacilityId(hotelFacilityEntity.getFacilityId());
+        /*facilityDto.setFacilityId(hotelFacilityEntity.getFacilityId());*/
         return facilityDto;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.hotel_booking.controller;
 
 import com.example.hotel_booking.dto.HotelDto;
+import com.example.hotel_booking.entity.HotelEntity;
 import com.example.hotel_booking.service.Impl.HotelFileServiceImpl;
 import com.example.hotel_booking.service.Impl.HotelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,11 +60,11 @@ public class SearchController {
             }
         }
 
-        List<HotelDto> hotelDtoList = hotelService.searchHotel(gradeList, cityIdList, facilityIdList, hotelName);
+        List<HotelEntity> hotelDtoList = hotelService.searchHotel(gradeList, cityIdList, facilityIdList, hotelName);
         //Map<Long, List<HotelFileDto>> hotelFileDtoList = hotelFileService.getThumbnailList(hotelDtoList.stream().map(HotelDto::getId).toList());
 
-        for (HotelDto hotelDto : hotelDtoList) {
-            hotelDto.setImageList(hotelFileService.findByHotelIdToName(hotelDto.getId()));
+        for (HotelEntity hotelDto : hotelDtoList) {
+//            hotelDto.setImageList(hotelFileService.findByHotelIdToName(hotelDto.getId()));
         }
 
         String startDateData = data.get("startDate").toString();

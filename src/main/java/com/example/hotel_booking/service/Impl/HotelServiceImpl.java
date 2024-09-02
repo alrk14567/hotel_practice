@@ -159,7 +159,7 @@ public class HotelServiceImpl implements HotelService {
 
     public Long save(HotelDto hotelDto) {
 
-        HotelDto hotelDto = new HotelDto();
+        /*HotelDto hotelDto = new HotelDto();
         hotelDto.setHotelName((String) valueMap.get("hotelName"));
         hotelDto.setHotelEmail((String) valueMap.get("hotelEmail"));
         hotelDto.setHotelPhone((String) valueMap.get("hotelPhone"));
@@ -202,8 +202,8 @@ public class HotelServiceImpl implements HotelService {
         CityEntity cityEntity = cityRepository.findById(hotelDto.getCityId()).get();
         UserEntity userEntity = userRepository.findById(hotelDto.getUserId()).get();
         HotelEntity hotelEntity = HotelEntity.toHotelEntity(hotelDto, cityEntity, userEntity);
-        HotelEntity hotel = hotelRepository.save(hotelEntity);
-        return hotel.getId();
+        HotelEntity hotel = hotelRepository.save(hotelEntity);*/
+        return null;
     }
 
 
@@ -232,12 +232,12 @@ public class HotelServiceImpl implements HotelService {
             HotelEntity hotelEntity = optionalHotelEntity.get();
             HashMap<String, Object> hashMap = new HashMap<>();
             List<FileEntity> hotelFileDtoList = fileService.findByHotelId(id);
-            List<Long> facilityIdList = hotelService.facilityAll(id);
-            List<Long> FacilityIdList = facilityIdList.stream().distinct().collect(Collectors.toList());
-            System.out.println(facilityIdList);
-            hashMap.put("hotelEntity", hotelService.findById(id));
-            hashMap.put("facilities", FacilityIdList);
-            hashMap.put("hotelFileDtoList", hotelFileDtoList);
+//            List<Long> facilityIdList = hotelService.facilityAll(id);
+//            List<Long> FacilityIdList = facilityIdList.stream().distinct().collect(Collectors.toList());
+//            System.out.println(facilityIdList);
+//            hashMap.put("hotelEntity", hotelService.findById(id));
+//            hashMap.put("facilities", FacilityIdList);
+//            hashMap.put("hotelFileDtoList", hotelFileDtoList);
 
             return hotelEntity;
         } else {
@@ -248,16 +248,16 @@ public class HotelServiceImpl implements HotelService {
     public HotelEntity update(HotelDto hotelDto) {
         CityEntity cityEntity = cityRepository.findById(hotelDto.getCityId()).get();
         UserEntity userEntity = userRepository.findById(hotelDto.getUserId()).get();
-        HotelEntity hotelEntity = HotelEntity.updateHotelEntity(hotelDto, cityEntity, userEntity);
-        HotelEntity hotel = hotelRepository.save(hotelEntity);
+//        HotelEntity hotelEntity = HotelEntity.updateHotelEntity(hotelDto, cityEntity, userEntity);
+//        HotelEntity hotel = hotelRepository.save(hotelEntity);
 
-        return findById(hotel.getId());
+        return findById(hotelDto.getId());
     }
 
     public List<Long> facilityAll(long id) {
-        List<Long> byHotelEntityId = hotelFacilityRepository.findByHotelEntity_id(id);
-        Collections.sort(byHotelEntityId);
-        return byHotelEntityId;
+//        List<Long> byHotelEntityId = hotelFacilityRepository.findByHotelEntity_id(id);
+//        Collections.sort(byHotelEntityId);
+        return null;
     }
 
 
