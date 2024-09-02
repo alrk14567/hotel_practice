@@ -11,4 +11,6 @@ import java.io.Serializable;
 public class CityDto implements Serializable {
     private Long id;
     private String cityName;
+
+    //test 확인
 }
