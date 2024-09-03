@@ -3,6 +3,7 @@ package com.example.hotel_booking.controller;
 import com.example.hotel_booking.dto.FacilityDto;
 import com.example.hotel_booking.dto.HotelDto;
 import com.example.hotel_booking.dto.HotelFileDto;
+import com.example.hotel_booking.entity.HotelEntity;
 import com.example.hotel_booking.service.Impl.FacilityServiceImpl;
 import com.example.hotel_booking.service.Impl.HotelFileServiceImpl;
 import com.example.hotel_booking.service.Impl.HotelServiceImpl;
