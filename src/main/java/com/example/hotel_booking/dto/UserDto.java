@@ -1,24 +1,18 @@
 package com.example.hotel_booking.dto;
 
 import com.example.hotel_booking.entity.UserEntity;
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.*;
+
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * DTO for {@link com.example.hotel_booking.entity.UserEntity}
  */
 @Data
-public class UserDto implements Serializable, UserDetails {
+@RequiredArgsConstructor
+public class UserDto implements Serializable {
     private UserEntity user;
     Long id;
     String email;
@@ -34,13 +28,6 @@ public class UserDto implements Serializable, UserDetails {
     int enabled;
     Long visitorCount;
 
-    private List<GrantedAuthority> authorities;
-
-    public List<GrantedAuthority> getAuthorities() {
-        authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role));
-        return authorities;
-    }
 
     public String getUsername() {
         return email;

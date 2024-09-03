@@ -1,3 +1,4 @@
+/*
 package com.example.hotel_booking.config;
 
 import com.example.hotel_booking.service.Impl.UserDetailsServiceImpl;
@@ -69,3 +70,4 @@ public class SecurityConfig {
         return new CorsFilter(source);
     }
 }
+*/

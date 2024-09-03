@@ -8,11 +8,11 @@ import com.example.hotel_booking.service.Impl.ReviewServiceImpl;
 import com.example.hotel_booking.service.Impl.UserServiceImpl;
 import com.example.hotel_booking.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +27,7 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
     private final UserServiceImpl USER_SERVICE;
-    @Autowired
-    private BCryptPasswordEncoder encoder;
+
 
     private final UserService userService;
     private final ReservationServiceImpl reservationService;
@@ -39,7 +38,7 @@ public class UserController {
     @RequestMapping("/authOk")
     public ResponseEntity<Map<String, Object>> authOk(Authentication authentication) {
         Map<String, Object> resultMap = new HashMap<>();
-        UserDto userDto = (UserDto) authentication.getPrincipal();
+        UserDto userDto = new UserDto();
         // getPrincipal을 바로 resultMap에 넣는건 좋지 않다 왜냐면 패스워드가 넘어가니깐
         resultMap.put("result", "success");
         resultMap.put("id", userDto.getId());
@@ -73,7 +72,7 @@ public class UserController {
     @PostMapping("/register")
     public HashMap<String, Object> register(@RequestBody UserDto userDto) {
         System.out.println(userDto);
-        userDto.setPassword(encoder.encode(userDto.getPassword()));
+        userDto.setPassword("a");
         HashMap<String, Object> resultMap = new HashMap<>();
 
         try {
