@@ -2,6 +2,7 @@ package com.example.hotel_booking.controller;
 
 
 import com.example.hotel_booking.dto.CityDto;
+import com.example.hotel_booking.entity.CityEntity;
 import com.example.hotel_booking.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class CityController {
     }
 
     @PostMapping("/insert")
-    public boolean write(@RequestBody CityDto cityDto) {
-        return cityService.save(cityDto);
+    public ResponseEntity<?> write(@RequestBody CityEntity cityEntity) {
+        return cityService.save(cityEntity).get();
     }
 }

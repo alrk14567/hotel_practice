@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface CityRepository extends JpaRepository<CityEntity, Long> {
 
-    Boolean save(CityDto cityDto);
+    Optional<CityEntity> save(CityEntity cityEntity);
 }

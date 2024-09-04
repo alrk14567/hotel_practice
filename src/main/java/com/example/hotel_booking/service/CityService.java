@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CityService {
-    boolean save(CityDto cityDto);
+    Optional<CityEntity> save(CityEntity cityEntity);
 
     List<CityEntity> findAll();
 
