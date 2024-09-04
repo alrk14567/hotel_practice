@@ -1,13 +1,11 @@
 package com.example.hotel_booking.controller;
 
 
+import com.example.hotel_booking.dto.CityDto;
 import com.example.hotel_booking.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +16,14 @@ import java.util.List;
 public class CityController {
     private final CityService cityService;
 
-    @GetMapping("cityAll")
+    @GetMapping("/cityAll")
     public ResponseEntity<List<?>> hotelAll() {
 
         return ResponseEntity.ok(cityService.findAll());
+    }
+
+    @PostMapping("/insert")
+    public ResponseEntity<?> write(@RequestBody CityDto cityDto) {
+        return ResponseEntity.ok(cityService.save(cityDto).get());
     }
 }
