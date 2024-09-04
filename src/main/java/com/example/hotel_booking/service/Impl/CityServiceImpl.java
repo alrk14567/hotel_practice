@@ -18,13 +18,11 @@ public class CityServiceImpl implements CityService {
 
 
     @Override
-    public Boolean save(CityDto cityDto) {
+    public CityEntity save(CityDto cityDto) {
+        CityEntity cityEntity = new CityEntity();
+        cityEntity.setCityName(cityDto.getCityName());
 
-        if (cityRepository.save(cityDto).isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return cityRepository.save(cityEntity);
     }
 
     @Override
