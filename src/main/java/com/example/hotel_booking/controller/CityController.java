@@ -24,7 +24,7 @@ public class CityController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Boolean> write(@RequestBody CityDto cityEntity) {
-        return ResponseEntity.ok(cityService.save(cityEntity));
+    public ResponseEntity<Boolean> write(@RequestBody CityDto cityDto) {
+        return ResponseEntity.ok(cityService.save(cityDto));
     }
 }
