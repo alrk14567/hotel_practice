@@ -23,7 +23,7 @@ public class CityController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<?> write(@RequestBody CityDto cityDto) {
-        return ResponseEntity.ok(cityService.save(cityDto));
+    public boolean write(@RequestBody CityDto cityDto) {
+        return cityService.save(cityDto);
     }
 }
