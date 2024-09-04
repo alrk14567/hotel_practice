@@ -16,8 +16,9 @@ public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
 
+
     @Override
-    public Optional<CityEntity> save(CityDto cityDto) {
+    public boolean save(CityDto cityDto) {
         return cityRepository.save(cityDto);
     }
 
