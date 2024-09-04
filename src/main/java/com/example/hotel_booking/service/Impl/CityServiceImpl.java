@@ -18,10 +18,7 @@ public class CityServiceImpl implements CityService {
 
 
     @Override
-    public CityEntity save(CityDto cityDto) {
-        CityEntity cityEntity = new CityEntity();
-        cityEntity.setCityName(cityDto.getCityName());
-
+    public CityEntity save(CityEntity cityEntity) {
         return cityRepository.save(cityEntity);
     }
 
